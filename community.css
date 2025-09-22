@@ -1,0 +1,458 @@
+/* Hamburger menu styles */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  color: #ff9800;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+@media (max-width: 900px) {
+  .top {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .top {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #222;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0 0 10px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    display: none;
+    z-index: 100;
+  }
+  .top.show {
+    display: flex;
+  }
+  .top a {
+    width: 100%;
+    padding: 12px 24px;
+    border-bottom: 1px solid #444;
+    margin: 0;
+  }
+}
+
+
+/* Redesigned Contact Form */
+.contact-card {
+  max-width: 400px;
+  margin: 24px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 16px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact-title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #222;
+  font-size: 1.5rem;
+}
+.contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group {
+  width: 100%;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.97rem;
+  margin-bottom: 0;
+  background: #fafafa;
+  transition: border 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 1.5px solid #ff9800;
+  outline: none;
+}
+.contact-form textarea {
+  min-height: 50px;
+  resize: vertical;
+}
+.contact-btn-main {
+  width: 100%;
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+.contact-btn-main:hover {
+  background: #e68900;
+}
+#formMsg {
+  text-align: center;
+  margin-top: 12px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+/* Social media icons row */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 32px 0 16px 0;
+}
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  filter: grayscale(0.2) brightness(0.9);
+  transition: filter 0.2s;
+}
+.social-icons img:hover {
+  filter: none;
+}
+/* Grid container for multiple profiles: 2 per row */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  justify-items: center;
+  align-items: stretch;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.profiles-grid .profile-row {
+  background: #fafafa;
+  padding: 24px 18px;
+ /* border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);*/
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 350px;
+  min-width: 260px;
+  margin: 0 auto;
+}
+/* Profile Row for Sector Section */
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 40px 0;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.profile-desc {
+  max-width: auto;
+}
+.profile-desc h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+}
+.profile-desc p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navigation Bar */
+    header {
+      background: #222;
+      color: #fff;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff9800;
+    }
+
+    .top a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .top a:hover {
+      color: #ff9800;
+    }
+
+    /* Section */
+    section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* People Grid */
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .person {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .person:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .person img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .person h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .person p {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    /* Contact Button */
+    .contact-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      background: #ff9800;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      background: #e68900;
+      transform: scale(1.05);
+    }
+
+    .sector h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #222;
+    }
+    /* Responsive Design */
+
+    @media (max-width: 768px) {
+      .top a {
+        margin-left: 10px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .person img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .person h3 {
+        font-size: 1rem;
+      }
+
+      .person p {
+        font-size: 0.9rem;
+      }
+    }
+
+
+    .footer{
+    text-align: center;
+    padding: 20px;
+    background:#ccc;
+    color: white;
+    margin-top: 20px;
+}
+
+.divide{
+  display: flex;
+  gap:10px;
+}
+
+.div{
+  width: 30%;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 480px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(75,154,170,0.10);
+}
+
+#formMsg {
+  text-align: center;
+  color: #4b9aaa;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+button, .we {
+  background: linear-gradient(90deg, #4b9aaa 60%, #4b58aa 100%);
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(75,154,170,0.08);
+}
+
+button:hover, .we:hover {
+  background: #2e6c77;
+  box-shadow: 0 4px 16px rgba(75,154,170,0.15);
+}
+
+ 
+.community {
+  padding: 40px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.community h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.community-banner {
+  width: 100vw;       /* full viewport width */
+  height: 400px;      /* adjust height as needed */
+  object-fit: cover;  /* crop nicely */
+  margin: 0 auto 30px;
+  margin-right: 10px;
+  border-radius: 0;   /* remove rounding since it's full-width */
+  display: block;    /* ensure it behaves like a block element */
+  border-radius: 10px; 
+}
+
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.member {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.member:hover {
+  transform: translateY(-5px);
+}
+
+.member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+button {
+  background: #00bcd4;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #0097a7;
+}
+
+
+
+
+

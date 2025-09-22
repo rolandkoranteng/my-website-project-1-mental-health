@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PsyCare</title>
+  <link rel="stylesheet" href="wellness.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="logo"><span>Psycare</span></div>
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="top" id="navMenu">
+          <a href="index.html">Home</a>
+          <a href="article.html">Articles</a>
+          <a href="community.html">Community</a>
+          <a href="wellness.html">Wellness</a>
+        </div>
+      </nav>
+    </header>
+
+     <!-- Banner -->
+<section class="banner">
+  <div class="banner-content">
+    <h1>Welcome to Your Wellness Hub</h1>
+    <p>Discover tips, games, journals, and workshops for a healthier mind</p>
+    <button id="getTip">Get a Tip</button>
+    <div class="tip" id="tipDisplay"></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="grid3">
+  <div class="card"><span style="font-size:2rem;">📝</span><h3>Journaling</h3><p>Write down thoughts to reflect on your mental health.</p></div>
+  <div class="card"><span style="font-size:2rem;">🎮</span><h3>Games</h3><p>Fun games to relax and reduce stress.</p></div>
+  <div class="card"><span style="font-size:2rem;">📚</span><h3>Workshops</h3><p>Expert-led sessions to improve well-being.</p></div>
+</section>
+
+<!-- Journal -->
+<section class="journal">
+  <h2>Your Personal Journal</h2>
+  <textarea id="journalInput" placeholder="Write your thoughts here..."></textarea><br>
+  <button onclick="saveEntry()">Save Entry</button>
+  <button onclick="downloadEntry()">Download Entry</button>
+  <button onclick="deleteEntry()">Delete Entry</button>
+</section>
+
+<!-- Games -->
+<section style="background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%); border-radius: 22px; box-shadow: 0 2px 12px rgba(42,77,105,0.10); padding: 48px 0 40px 0; margin: 48px 0;">
+  <h2 style="text-align:center; font-size:2.2rem; color:#2a4d69; margin-bottom: 18px; letter-spacing: 1px; font-weight: 700;">Interactive Games</h2>
+  <div class="grid3">
+    <!-- Rock Paper Scissors -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">✊</span>
+      <h3 style="margin-bottom: 6px;">Rock Paper Scissors</h3>
+      <div class="game-area" id="rps-area">
+        <button onclick="playRPS('Rock')">Rock</button>
+        <button onclick="playRPS('Paper')">Paper</button>
+        <button onclick="playRPS('Scissors')">Scissors</button>
+        <p id="rps-result"></p>
+      </div>
+    </div>
+    <!-- Number Guess -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">🔢</span>
+      <h3 style="margin-bottom: 6px;">Number Guess</h3>
+      <div class="game-area">
+        <button onclick="startNumberGuess()">Start</button>
+        <p id="number-result"></p>
+      </div>
+    </div>
+    <!-- Coin Flip -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">🪙</span>
+      <h3 style="margin-bottom: 6px;">Coin Flip</h3>
+      <div class="game-area">
+        <button onclick="coinFlip()">Flip Coin</button>
+        <p id="coin-result"></p>
+      </div>
+    </div>
+    <!-- Dice Roll -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">🎲</span>
+      <h3 style="margin-bottom: 6px;">Dice Roll</h3>
+      <div class="game-area">
+        <button onclick="diceRoll()">Roll Dice</button>
+        <p id="dice-result"></p>
+      </div>
+    </div>
+    <!-- Color Guess -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">🎨</span>
+      <h3 style="margin-bottom: 6px;">Color Guess</h3>
+      <div class="game-area">
+        <input type="text" id="color-guess" placeholder="Type a color"/>
+        <button onclick="colorGuess()">Check</button>
+        <p id="color-result"></p>
+      </div>
+    </div>
+    <!-- Word Unscramble -->
+    <div class="card game-card" style="display: flex; flex-direction: column; align-items: center;">
+      <span style="font-size:2.1rem; margin-bottom: 6px; color: #00bcd4;">🔀</span>
+      <h3 style="margin-bottom: 6px;">Word Unscramble</h3>
+      <div class="game-area">
+        <button onclick="wordUnscramble()">Get Word</button>
+        <p id="word-result"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Workshops -->
+ <h2 id="center">Join Engaging Workshops</h2>
+<section class="grid3">
+  <div class="card"><img src="https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg" alt="Stress Management"><h3>Stress Management</h3><button onclick="alert('Joined Stress Management Workshop')">Join Workshop</button></div>
+  <div class="card"><img src="https://images.pexels.com/photos/261735/pexels-photo-261735.jpeg" alt="Meditation Basics"><h3>Meditation Basics</h3><button onclick="alert('Joined Meditation Workshop')">Join Workshop</button></div>
+  <div class="card"><img src="https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg" alt="Healthy Sleep"><h3>Healthy Sleep</h3><button onclick="alert('Joined Sleep Workshop')">Join Workshop</button></div>
+</section>
+ 
+
+ <footer class="footer">
+  <div class="social-icons">
+    <a href="https://wa.me/" target="_blank" title="WhatsApp">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" />
+    </a>
+    <a href="https://twitter.com/" target="_blank" title="Twitter">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" />
+    </a>
+    <a href="https://facebook.com/" target="_blank" title="Facebook">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
+    </a>
+    <a href="https://instagram.com/" target="_blank" title="Instagram">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
+    </a>
+  </div>
+  <div class="divide">
+    <div class="div">
+    <h3>Explore</h3>
+    <p>
+      Articles<br>
+      Community<br>
+      About Us<br>
+    </p>
+    </div>
+    <div class="div">
+    <h3>Resources</h3>
+    <p>
+      Expert Advice<br>
+      Personal Stories<br>
+      Mental Health Resources<br>
+    </p>
+    </div>
+    <div class="div">
+    <p>
+      Connect<br>
+      Blog<br>
+      Community<br>
+    </p>
+    </div>
+  </div>
+     
+    <div>
+      &copy; RolanKo 2025 . All Rights Reserved
+    </div> 
+  </footer>
+
+      
+ 
+<script src="wellness.js"></script>
+</body>
+</html>

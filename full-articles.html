@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PsyCare — Articles (Full)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+  /* Hamburger menu styles */
+  .nav-toggle {
+    display: none;
+    font-size: 2rem;
+    color: var(--accent-2);
+    cursor: pointer;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 900px) {
+    nav {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-wrap: wrap;
+    }
+    .nav-toggle {
+      display: block;
+    }
+    #navMenu {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg,var(--card),#f0f6fa);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 0 0 10px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      display: none;
+      z-index: 100;
+    }
+    #navMenu.show {
+      display: flex;
+    }
+    #navMenu a {
+      width: 100%;
+      padding: 12px 24px;
+      border-bottom: 1px solid #eee;
+      margin: 0;
+    }
+  }
+  :root{
+    --accent:#1f9bd1;
+    --accent-2:#2c7fb8;
+    --muted:#6b7c93;
+    --bg:#f6f9fc;
+    --card:#ffffff;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:#122028;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+  }
+  #pageTitle {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:linear-gradient(90deg,var(--card),#f0f6fa);
+    border-bottom:1px solid rgba(17,24,39,0.06);
+    padding:14px 22px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{font-weight:700; color:var(--accent-2); font-size:1.15rem}
+  nav a{margin-left:18px; color:#21313a; text-decoration:none; font-weight:600}
+  nav a:hover{color:var(--accent)}
+
+  /* Hero */
+  .hero{
+    text-align:center;
+    padding:44px 18px;
+    background:linear-gradient(180deg, rgba(31,155,209,0.08), transparent 60%);
+    background:url('https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg') center/cover no-repeat; 
+    color:blue;
+    text-align:center; 
+    height:400px; 
+    position:relative;
+     padding:0 20px;
+
+    
+  }
+  .hero h1{font-size:2rem; margin-bottom:8px; color:#08202a}
+  .hero p{max-width:980px; margin:0 auto; color:var(--muted)}
+
+  /* Search */
+  .controls{
+    display:flex; justify-content:center; gap:10px; padding:20px;
+  }
+  .search {
+    width:min(760px,90%); display:flex; gap:8px;
+  }
+  .search input{
+    flex:1; padding:12px 14px; border-radius:10px; border:1px solid rgba(0,0,0,0.08);
+    font-size:1rem; outline:none;
+  }
+  .search button{
+    background:var(--accent); color:white; border:none; padding:10px 14px; border-radius:10px; font-weight:700;
+    cursor:pointer;
+  }
+
+  /* Grid */
+  .grid{
+    max-width:1200px; margin:18px auto; padding:0 18px 60px;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:18px;
+  }
+
+  /* Article card */
+  .card{
+    background:var(--card); border-radius:var(--radius);
+    padding:18px; box-shadow:0 6px 18px rgba(16,24,32,0.06);
+    display:flex; flex-direction:column; min-height:160px;
+  }
+  .meta{
+    display:flex; align-items:center; gap:10px; margin-bottom:8px;
+  }
+  .tag{
+    padding:6px 9px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white;
+    font-weight:700; font-size:0.80rem; border-radius:8px;
+  }
+  .title{font-size:1.05rem; font-weight:700; color:#0b2b36; margin:6px 0 10px}
+  .excerpt{color:var(--muted); font-size:0.95rem}
+
+  /* Read more / content area */
+  .full{
+    overflow:hidden;
+    transition: max-height 320ms ease, opacity 220ms ease, padding 220ms ease;
+    max-height:0; opacity:0; padding-top:0;
+  }
+  .full.open{
+    max-height:2000px; opacity:1; padding-top:12px;
+  }
+  .full p{margin:0 0 12px}
+
+  .actions{
+    margin-top:auto; display:flex; justify-content:space-between; align-items:center; gap:8px;
+  }
+  .btn{
+    padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
+    background:var(--accent); color:white;
+  }
+  .btn.secondary{background:transparent; color:var(--accent-2); border:1px solid rgba(31,155,209,0.14)}
+  .small-muted{color:var(--muted); font-size:0.9rem}
+
+  /* Read less link */
+  .toggle-link{background:none; border:none; color:var(--accent-2); cursor:pointer; font-weight:700; padding:0}
+  
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 32px 0 16px 0;
+}
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  filter: grayscale(0.2) brightness(0.9);
+  transition: filter 0.2s;
+}
+.social-icons img:hover {
+  filter: none;
+}
+  /* Footer */
+  .footer{
+    text-align: center;
+    padding: 20px;
+    background:#ccc;
+    color: white;
+    margin-top: 20px;
+}
+
+.divide{
+  display: flex;
+  gap:10px;
+}
+
+.div{
+  width: 30%;
+  text-align: center;
+}
+
+  /* Accessibility focus */
+  button:focus, a:focus, input:focus{outline:3px solid rgba(31,155,209,0.12); outline-offset:2px}
+
+  @media (max-width:520px){
+    .hero h1{font-size:1.5rem}
+    .tag{font-size:0.75rem; padding:5px 8px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">PsyCare</div>
+  <div class="nav-toggle" id="navToggle">
+    <span style="font-size:2rem; color:#2c7fb8; cursor:pointer;"><i class="fas fa-bars"></i></span>
+  </div>
+  <nav id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="article.html">Articles</a>
+    <a href="community.html">Community</a>
+    <a href="welness.html">Wellness</a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="pageTitle">
+  <h1 id="pageTitle">PsyCare — In-depth Articles for Mental Well-Being</h1>
+  <p>Below are 12 full-length articles on mental health topics. Click "Read more" to expand the full article inline. Use the search to filter titles and content.</p>
+</section>
+
+<section class="controls" aria-hidden="false">
+  <div class="search" role="search" aria-label="Search articles">
+    <input id="search" type="search" placeholder="Search articles by title or text..." aria-label="Search articles">
+    <button id="clearBtn" title="Clear search">Clear</button>
+  </div>
+</section>
+
+<main class="grid" id="articlesGrid" aria-live="polite">
+  <!-- ARTICLE 1 -->
+  <article class="card" data-title="Breaking The Stigma Around Mental Health" data-body="Breaking the stigma around mental health...">
+    <div class="meta">
+      <span class="tag">Awareness</span>
+      <div class="small-muted">By PsyCare · 10 min read</div>
+    </div>
+    <div class="title">Breaking The Stigma Around Mental Health</div>
+    <div class="excerpt">Stigma prevents people from getting help. This article explores how to normalize conversations, the role of community, and steps you can take today to reduce stigma.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Understanding stigma.</strong> For decades, mental health has been shrouded in silent judgment. People are labeled, blamed, or misunderstood. This stigma discourages individuals from seeking help, talking openly about their struggles, or accessing resources. The first step in dismantling stigma is understanding where it comes from: fear, lack of education, cultural narratives, and sometimes sensational media coverage.</p>
+
+      <p><strong>The human cost.</strong> Stigma has real consequences — delayed treatment, isolation, worsening symptoms, and tragically, preventable loss. Studies repeatedly link stigma to lower help-seeking and adherence to treatment. For some groups, stigma intersects with other biases (race, gender, socioeconomic status), multiplying harm.</p>
+
+      <p><strong>What communities can do.</strong> Schools, employers, and religious organizations can all normalize conversations about mental health. Implementing mental health education in schools, offering employee assistance programs, and training community leaders to spot signs of distress create multiple safety nets for people in need.</p>
+
+      <p><strong>Practical actions you can take.</strong> Share your own story if you’re comfortable, listen without judgment, challenge harmful jokes or stereotypes, support local mental health charities, and use language that centers the person, not the diagnosis (e.g., "person with depression" vs "depressed person"). Small, consistent actions across social networks add up.</p>
+
+      <p><strong>Policy and public messaging.</strong> Public campaigns that feature trusted figures, transparent information about treatments, and accessible services are effective. Governments and healthcare systems can fund anti-stigma campaigns, integrate mental health into primary care, and subsidize services for underserved communities.</p>
+
+      <p><strong>Final thought.</strong> Breaking stigma requires compassion, education, and visible support. When we remove shame and replace it with understanding, people get help sooner, communities get healthier, and lives are saved.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Mental Health · Awareness</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 2 -->
+  <article class="card" data-title="Common Myths About Mental Illness" data-body="Common myths about mental illness...">
+    <div class="meta">
+      <span class="tag">Myths</span>
+      <div class="small-muted">By PsyCare · 8 min read</div>
+    </div>
+    <div class="title">Common Myths About Mental Illness</div>
+    <div class="excerpt">Misinformation makes recovery harder. We debunk common myths and explain the facts so you can identify and challenge harmful beliefs.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Myth 1: Mental illness is a sign of weakness.</strong> Many people still view mental struggles as a personal failing. In reality, mental disorders are health conditions influenced by biology, environment, and life events. Acknowledging vulnerabilities and seeking care is an act of strength, not weakness.</p>
+
+      <p><strong>Myth 2: Therapy is only for severe cases.</strong> Therapy can help with everyday stress, relationships, career decisions, grief, and personal growth. Early therapy can prevent longer-term issues by giving people tools to cope and change unhelpful patterns.</p>
+
+      <p><strong>Myth 3: Medication changes who you are.</strong> Psychiatric medications aim to rebalance brain chemistry to reduce symptoms and restore functioning. When combined with therapy and healthy lifestyle changes, medication can help a person reclaim their life; it doesn’t erase personality.</p>
+
+      <p><strong>Myth 4: You can 'snap out of it'.</strong> This minimizes the experience of someone living with depression or anxiety. Mental health conditions often require structured interventions — psychological, social, and sometimes pharmacological.</p>
+
+      <p><strong>How to challenge myths.</strong> Seek trustworthy sources (peer-reviewed articles, professional organizations), listen to lived experience accounts, and model compassionate responses. When confronted with misinformation, ask gentle questions and offer accurate alternatives rather than shaming the other person.</p>
+
+      <p><strong>The payoff.</strong> When myths fade, people access care sooner, employers create supportive policies, and families offer more effective help. Myth-busting is an essential part of a healthier, more informed society.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Education · Facts</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 3 -->
+  <article class="card" data-title="Why Mental Health Is Just As Important As Physical Health" data-body="Mental health importance...">
+    <div class="meta">
+      <span class="tag">Wellness</span>
+      <div class="small-muted">By PsyCare · 9 min read</div>
+    </div>
+    <div class="title">Why Mental Health Is Just As Important As Physical Health</div>
+    <div class="excerpt">Mental and physical health are deeply connected. This article explains the interplay and why integrated care matters for long-term wellbeing.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Mind-body connection.</strong> Physical and mental health influence each other continuously. Chronic physical illnesses increase risk of depression, while untreated mental health conditions can worsen physical recovery. Biological mechanisms — like inflammation, stress hormones, and sleep disruption — link the two domains.</p>
+
+      <p><strong>Why parity matters.</strong> Treating mental health with the same urgency as physical health ensures individuals get holistic care. Parity in insurance coverage, workforce training, and primary care integration reduces barriers to early treatment and improves outcomes.</p>
+
+      <p><strong>Case examples.</strong> Patients with diabetes have higher rates of depression; addressing both leads to better glucose control. People recovering from heart surgery who receive psychosocial support show stronger recovery and fewer complications.</p>
+
+      <p><strong>Integrated approaches.</strong> The best systems embed mental health into routine healthcare: screening in primary care, liaison psychiatry in hospitals, and multidisciplinary teams collaborating on treatment plans. For individuals, combining physical activity, nutrition, sleep, social support, and therapy creates resilience.</p>
+
+      <p><strong>Practical steps.</strong> Regular exercise, meaningful social contact, mindful routines, and checkups with both physical and mental health professionals keep both systems healthy. Remove the false dichotomy — health is whole.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Integration · Health</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 4 -->
+  <article class="card" data-title="How To Manage Stress In Daily Life" data-body="Manage stress daily...">
+    <div class="meta">
+      <span class="tag">Practical</span>
+      <div class="small-muted">By PsyCare · 10 min read</div>
+    </div>
+    <div class="title">How To Manage Stress In Daily Life</div>
+    <div class="excerpt">Stress is normal — unmanaged stress is not. Learn practical, evidence-based tools to reduce stress and strengthen resilience in everyday life.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Recognize your stressors.</strong> Track what triggers your stress over a week — tasks, environments, people, or internal thoughts. Awareness allows targeted change rather than generic advice.</p>
+
+      <p><strong>Breathing and grounding techniques.</strong> Two minutes of diaphragmatic breathing lowers heart rate and calms nervous system pathways. Grounding (5-4-3-2-1 sensory method) swiftly reduces acute anxiety by shifting attention to the present.</p>
+
+      <p><strong>Routine and boundaries.</strong> Predictability reduces cognitive load. Build small daily routines for sleep, meals, and breaks. Set clear boundaries with work (scheduled checkouts, no-email windows) to prevent chronic overload.</p>
+
+      <p><strong>Activity and sleep.</strong> Moderate exercise reduces stress hormones and improves mood. Prioritize sleep: even small improvements (consistent bed/wake time, dark room) reduce perceived stress.</p>
+
+      <p><strong>Social support.</strong> Talk with trusted friends, family, or mentors. Sharing burden reduces the psychological load and often yields practical solutions.</p>
+
+      <p><strong>Professional help.</strong> Therapy teaches cognitive and behavioral tools to reframe stress responses; medication may be appropriate for comorbid anxiety or depression. Early help prevents long-term difficulties.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Self-Care · Tools</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 5 -->
+  <article class="card" data-title="The Link Between Anxiety And Overthinking" data-body="Anxiety and overthinking...">
+    <div class="meta">
+      <span class="tag">Insight</span>
+      <div class="small-muted">By PsyCare · 9 min read</div>
+    </div>
+    <div class="title">The Link Between Anxiety And Overthinking</div>
+    <div class="excerpt">When worry becomes repetitive thinking it compounds anxiety. Here’s how cycles form and how to break them using concrete strategies.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Why overthinking happens.</strong> Overthinking often aims to anticipate danger or control uncertainty. While sometimes useful, repeated rumination amplifies physiological arousal and keeps the brain stuck in threat mode.</p>
+
+      <p><strong>Ruminative loop.</strong> Thoughts → emotions → bodily sensations → more thoughts. The loop reinforces anxiety by confirming the mind's worst predictions. Interrupting the loop requires changing one link: thought, behavior, or body.</p>
+
+      <p><strong>Cognitive tools.</strong> Labeling thoughts (“I am worrying about X”) and testing predictions (what’s the realistic likelihood?) reduces catastrophic thinking. Problem-solving is useful for solvable worries; acceptance techniques help with uncertainty that can’t be solved now.</p>
+
+      <p><strong>Behavioral steps.</strong> Scheduling a “worry time” limits rumination to a short period. Behavioral activation (doing pleasant or meaningful activities) distracts and rebuilds a sense of agency and mastery.</p>
+
+      <p><strong>Body-based strategies.</strong> Progressive muscle relaxation, paced breathing, and movement shift autonomic arousal away from high-alert states and reduce the fuel for anxious thoughts.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Therapy · Techniques</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 6 -->
+  <article class="card" data-title="Practical Techniques For Coping With Anxiety" data-body="Practical techniques coping anxiety...">
+    <div class="meta">
+      <span class="tag">Skills</span>
+      <div class="small-muted">By PsyCare · 10 min read</div>
+    </div>
+    <div class="title">Practical Techniques For Coping With Anxiety</div>
+    <div class="excerpt">A clear toolbox of techniques — breathing, CBT basics, exposure, and lifestyle changes — that reduce anxiety symptoms when practiced consistently.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Breathing and grounding.</strong> Start with breath: 4-second inhale, 6-second exhale (or whatever length is comfortable). Grounding (sensory focus) helps interrupt spirals during panic or acute anxiety.</p>
+
+      <p><strong>CBT basics.</strong> Identify automatic negative thoughts, evaluate the evidence, and generate balanced alternatives. Creating a written record of triggers, thoughts, and outcomes strengthens learning.</p>
+
+      <p><strong>Exposure approach.</strong> For avoidance-based anxiety (social fears, specific phobias), gradual exposure in manageable steps reduces fear over time. Work with a therapist to design a safe hierarchy.</p>
+
+      <p><strong>Self-care and structure.</strong> Routine sleep, balanced nutrition, regular movement, and reduced stimulants (caffeine) support calmer baseline physiology and improve resilience to stressors.</p>
+
+      <p><strong>When to seek help.</strong> If anxiety impairs daily functioning or is accompanied by panic that prevents normal life, seek professional assessment. Therapists provide tailored exposure and cognitive work, while medications can reduce symptoms to a manageable level for therapy to succeed.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">CBT · Exposure</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 7 -->
+  <article class="card" data-title="Signs Of Depression You Shouldn't Ignore" data-body="Signs of depression...">
+    <div class="meta">
+      <span class="tag">Warning</span>
+      <div class="small-muted">By PsyCare · 9 min read</div>
+    </div>
+    <div class="title">Signs Of Depression You Shouldn't Ignore</div>
+    <div class="excerpt">Depression shows in mood, energy, cognition, and behavior. Early identification leads to better outcomes — know the signs and when to act.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Core symptoms.</strong> Persistent low mood, loss of interest or pleasure, significant weight or appetite change, sleep disturbances, fatigue or low energy, slowed thinking, or recurrent thoughts of death. Even a few of these, when persistent, warrant attention.</p>
+
+      <p><strong>Functional signs.</strong> Struggling at work or school, withdrawing from friends, declining self-care, and decreased motivation are practical indicators that depression is affecting life domains.</p>
+
+      <p><strong>When to seek immediate help.</strong> If someone mentions suicidal thoughts or shows severe hopelessness, seek immediate professional help or crisis services. Encourage a safety plan and remove access to lethal means (if relevant).</p>
+
+      <p><strong>Treatment options.</strong> Evidence-based treatments include psychotherapy (CBT, interpersonal therapy), antidepressant medication in moderate to severe cases, and combined approaches. Lifestyle changes and social support amplify recovery.</p>
+
+      <p><strong>Supporting someone.</strong> Listen nonjudgmentally, offer practical help, encourage professional contact, and check in frequently. Small consistent support helps people remain engaged with care.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Support · Signs</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 8 -->
+  <article class="card" data-title="How To Support Your Friend Living With Depression" data-body="Support friend depression...">
+    <div class="meta">
+      <span class="tag">Support</span>
+      <div class="small-muted">By PsyCare · 8 min read</div>
+    </div>
+    <div class="title">How To Support Your Friend Living With Depression</div>
+    <div class="excerpt">Supporting a friend requires presence, practical help, and knowing when to encourage professional care. This article gives clear, compassionate steps.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Be present and listen.</strong> Avoid platitudes like "just cheer up." Say things like "I’m here" and ask open questions. Validate feelings rather than minimize them.</p>
+
+      <p><strong>Offer practical help.</strong> Help with small tasks (appointments, meals) that can feel overwhelming. Offer to accompany them to a visit if they want support.</p>
+
+      <p><strong>Know boundaries.</strong> Supporting is different from being a therapist. Encourage professional help and offer resources. Set personal boundaries to avoid burnout — your capacity matters too.</p>
+
+      <p><strong>Emergency signs.</strong> If the person expresses intent to self-harm or has a plan, call emergency services or crisis lines. Help them make a safety plan and remove immediate risks.</p>
+
+      <p><strong>Continue checking in.</strong> Regular, brief texts or calls show ongoing care. Depression often involves isolation — consistent contact helps people feel less alone.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Compassion · Practical</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 9 -->
+  <article class="card" data-title="Seasonal Affective Disorder (SAD): What It Is and How To Cope" data-body="SAD coping...">
+    <div class="meta">
+      <span class="tag">Seasonal</span>
+      <div class="small-muted">By PsyCare · 8 min read</div>
+    </div>
+    <div class="title">Seasonal Affective Disorder (SAD): What It Is and How To Cope</div>
+    <div class="excerpt">SAD causes mood changes with seasonal patterns. Learn how light therapy, routines, and lifestyle shifts reduce symptoms and improve mood.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>What is SAD?</strong> Seasonal Affective Disorder is a subtype of depression that follows a seasonal pattern, most commonly beginning in autumn/winter. Symptoms include low mood, oversleeping, carbohydrate cravings, and social withdrawal.</p>
+
+      <p><strong>Treatments that help.</strong> Light therapy (using a bright light box) is one of the most effective first-line treatments. Cognitive-behavioral therapy adapted for SAD, regular exercise, vitamin D checks, and maintaining social contact also support recovery.</p>
+
+      <p><strong>Practical lifestyle steps.</strong> Maximize daylight exposure (sit near windows, take walks midday), keep a regular schedule, prioritize sleep hygiene, and plan enjoyable activities during darker months to offset withdrawal.</p>
+
+      <p><strong>When to consult a clinician.</strong> If symptoms persist or interfere with functioning, speak to a medical professional. A combination of light therapy and psychotherapy often yields the best results.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Seasonal · Care</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 10 -->
+  <article class="card" data-title="The Role Of Sleep In Mental Well-being" data-body="Sleep role mental well-being...">
+    <div class="meta">
+      <span class="tag">Sleep</span>
+      <div class="small-muted">By PsyCare · 9 min read</div>
+    </div>
+    <div class="title">The Role Of Sleep In Mental Well-being</div>
+    <div class="excerpt">Sleep and mental health are deeply linked. This article explains sleep stages, how poor sleep undermines mood, and practical ways to improve rest.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Why sleep matters.</strong> Sleep supports memory consolidation, emotional regulation, and metabolic balance. Poor sleep creates vulnerability to anxiety, depression, and cognitive decline.</p>
+
+      <p><strong>Sleep architecture.</strong> Deep slow-wave sleep restores the body, while REM sleep processes emotional experiences. Disrupting these stages reduces recovery and emotional processing.</p>
+
+      <p><strong>Improve sleep — practical tips.</strong> Keep a consistent sleep schedule; dim lights in the evening; limit screens 60–90 minutes before bed; keep the bedroom cool and dark; avoid heavy meals and caffeine late in the day.</p>
+
+      <p><strong>When sleep problems persist.</strong> Chronic insomnia often responds to cognitive behavioral therapy for insomnia (CBT-I). Medical evaluation can rule out sleep apnea or other disorders affecting rest.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Sleep · Science</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 11 -->
+  <article class="card" data-title="Mindfulness And Meditation For Beginners" data-body="Mindfulness meditation beginners...">
+    <div class="meta">
+      <span class="tag">Practice</span>
+      <div class="small-muted">By PsyCare · 8 min read</div>
+    </div>
+    <div class="title">Mindfulness And Meditation For Beginners</div>
+    <div class="excerpt">Short, consistent practice improves attention, reduces reactivity, and increases calm. Learn approachable ways to begin a meditation habit.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>What mindfulness is.</strong> Mindfulness means paying attention to the present moment intentionally and without judgment. It’s not about emptying the mind—it's about observing thoughts and sensations with curiosity.</p>
+
+      <p><strong>Simple practices.</strong> Start with 5 minutes breathing meditation: sit comfortably, focus on the breath, notice wandering thoughts, gently return attention. Body-scan and mindful walking are alternatives that anchor attention in sensation.</p>
+
+      <p><strong>Common challenges.</strong> Restlessness, boredom, or self-judgment are normal. Treat these as part of practice—notice them and return focus. Consistency matters more than duration.</p>
+
+      <p><strong>Benefits supported by research.</strong> Reduced stress and anxiety, improved attention, and better emotional regulation are consistent findings. Many people report better sleep and increased clarity.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Meditation · Habit</div>
+    </div>
+  </article>
+
+  <!-- ARTICLE 12 -->
+  <article class="card" data-title="Building Emotional Resilience In Tough Times" data-body="Building emotional resilience...">
+    <div class="meta">
+      <span class="tag">Resilience</span>
+      <div class="small-muted">By PsyCare · 10 min read</div>
+    </div>
+    <div class="title">Building Emotional Resilience In Tough Times</div>
+    <div class="excerpt">Resilience is the ability to adapt to stress and hardship. Learn practical ways to grow adaptability and recover from setbacks.</div>
+
+    <div class="full" aria-hidden="true">
+      <p><strong>Resilience isn't fixed.</strong> People can grow resilience through supportive relationships, skills training, and positive experiences. It’s not about preventing pain but adapting effectively.</p>
+
+      <p><strong>Core components.</strong> Emotional awareness, realistic optimism, problem-solving skills, and social support form the base of resilience. Practice reframing (finding meaning or learning), not forced positivity.</p>
+
+      <p><strong>Daily practices.</strong> Keep a gratitude or strengths journal, create small achievable goals, maintain social connections, and practice self-compassion. Exercise and sleep strengthen the physiological capacity to manage stress.</p>
+
+      <p><strong>When to seek help.</strong> If stress causes prolonged impairment, therapy builds personalized resilience strategies. Community programs and peer support groups also accelerate recovery.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn toggle" aria-expanded="false">Read more</button>
+      <div class="small-muted">Growth · Skills</div>
+    </div>
+  </article>
+
+</main>
+
+<footer class="footer">
+    <div class="social-icons">
+    <a href="https://wa.me/" target="_blank" title="WhatsApp">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" />
+    </a>
+    <a href="https://twitter.com/" target="_blank" title="Twitter">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" />
+    </a>
+    <a href="https://facebook.com/" target="_blank" title="Facebook">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
+    </a>
+    <a href="https://instagram.com/" target="_blank" title="Instagram">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
+    </a>
+  </div>
+  <div class="divide">
+    <div class="div">
+    <h3>Explore</h3>
+    <p>
+      Articles<br>
+      Community<br>
+      About Us<br>
+    </p>
+    </div>
+    <div class="div">
+    <h3>Resources</h3>
+    <p>
+      Expert Advice<br>
+      Personal Stories<br>
+      Mental Health Resources<br>
+    </p>
+    </div>
+    <div class="div">
+    <p>
+      Connect<br>
+      Blog<br>
+      Community<br>
+    </p>
+    </div>
+  </div>
+     
+    <div>
+      &copy; RolanKo 2025 . All Rights Reserved
+    </div> 
+  </footer>
+
+<script>
+  // Toggle expand/collapse
+  document.querySelectorAll('.card').forEach(card => {
+    const toggle = card.querySelector('.toggle');
+    const full = card.querySelector('.full');
+    toggle.addEventListener('click', () => {
+      const isOpen = full.classList.toggle('open');
+      toggle.textContent = isOpen ? 'Read less' : 'Read more';
+      toggle.setAttribute('aria-expanded', isOpen);
+      full.setAttribute('aria-hidden', !isOpen);
+      // smooth scroll into view when opening on small screens
+      if(isOpen && window.innerWidth < 600){
+        setTimeout(()=> card.scrollIntoView({behavior:'smooth', block:'start'}),200);
+      }
+    });
+  });
+
+  // Simple search filter
+  const searchInput = document.getElementById('search');
+  const grid = document.getElementById('articlesGrid');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function filterArticles(){
+    const q = searchInput.value.trim().toLowerCase();
+    document.querySelectorAll('.card').forEach(card=>{
+      const title = card.getAttribute('data-title').toLowerCase();
+      const body = card.getAttribute('data-body').toLowerCase();
+      // also consider excerpt text
+      const excerpt = card.querySelector('.excerpt').innerText.toLowerCase();
+      if(!q || title.includes(q) || body.includes(q) || excerpt.includes(q)){
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  searchInput.addEventListener('input', filterArticles);
+  clearBtn.addEventListener('click', ()=>{
+    searchInput.value = '';
+    filterArticles();
+    searchInput.focus();
+  });
+
+  // Preserve any saved scroll position or states could be added here.
+</script>
+<script src="script.js"></script>
+</body>
+</html>
