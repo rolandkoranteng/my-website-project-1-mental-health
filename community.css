@@ -45,7 +45,6 @@
   }
 }
 
-
 /* Redesigned Contact Form */
 .contact-card {
   max-width: 400px;
@@ -121,6 +120,7 @@
   justify-content: center;
   gap: 18px;
   margin: 32px 0 16px 0;
+  flex-wrap: wrap;
 }
 .social-icons img {
   width: 28px;
@@ -141,13 +141,12 @@
   align-items: stretch;
   margin: 0 auto;
   max-width: 900px;
+  padding: 0 20px;
 }
 
 .profiles-grid .profile-row {
   background: #fafafa;
   padding: 24px 18px;
- /* border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);*/
   display: flex;
   align-items: center;
   gap: 18px;
@@ -185,167 +184,150 @@
   font-size: 1.1rem;
   color: #333;
 }
-     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    /* Navigation Bar */
-    header {
-      background: #222;
-      color: #fff;
-      padding: 15px 30px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo span {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ff9800;
-    }
-
-    .top a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      cursor: pointer;
-    }
-
-    .top a:hover {
-      color: #ff9800;
-    }
-
-    /* Section */
-    section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    /* People Grid */
-    .people-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .person {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .person:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
-
-    .person img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .person h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .person p {
-      color: #555;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-    }
-
-    /* Contact Button */
-    .contact-btn {
-      display: inline-block;
-      padding: 10px 18px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #fff;
-      background: #ff9800;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .contact-btn:hover {
-      background: #e68900;
-      transform: scale(1.05);
-    }
-
-    .sector h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-      color: #222;
-    }
-    /* Responsive Design */
-
-    @media (max-width: 768px) {
-      .top a {
-        margin-left: 10px;
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .person img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .person h3 {
-        font-size: 1rem;
-      }
-
-      .person p {
-        font-size: 0.9rem;
-      }
-    }
-
-
-    .footer{
-    text-align: center;
-    padding: 20px;
-    background:#ccc;
-    color: white;
-    margin-top: 20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.divide{
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Navigation Bar */
+header {
+  background: #222;
+  color: #fff;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
   display: flex;
-  gap:10px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.div{
+.logo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff9800;
+}
+
+.top a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.top a:hover {
+  color: #ff9800;
+}
+
+/* Section */
+section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* People Grid */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.person {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.person:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.person img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.person h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.person p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+/* Contact Button */
+.contact-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  background: #ff9800;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.contact-btn:hover {
+  background: #e68900;
+  transform: scale(1.05);
+}
+
+.sector h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #222;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #ccc;
+  color: white;
+  margin-top: 20px;
+}
+
+.divide {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.div {
   width: 30%;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -387,7 +369,6 @@ button:hover, .we:hover {
   box-shadow: 0 4px 16px rgba(75,154,170,0.15);
 }
 
- 
 .community {
   padding: 40px;
   background: #f9f9f9;
@@ -400,21 +381,19 @@ button:hover, .we:hover {
 }
 
 .community-banner {
-  width: 100vw;       /* full viewport width */
-  height: 400px;      /* adjust height as needed */
-  object-fit: cover;  /* crop nicely */
+  width: 100vw;
+  height: 400px;
+  object-fit: cover;
   margin: 0 auto 30px;
-  margin-right: 10px;
-  border-radius: 0;   /* remove rounding since it's full-width */
-  display: block;    /* ensure it behaves like a block element */
-  border-radius: 10px; 
+  display: block;
+  border-radius: 10px;
 }
-
 
 .community-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  padding: 0 20px;
 }
 
 .member {
@@ -438,7 +417,7 @@ button:hover, .we:hover {
   margin-bottom: 10px;
 }
 
-button {
+.member button {
   background: #00bcd4;
   color: white;
   border: none;
@@ -446,13 +425,257 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  width: 100%;
+  max-width: 200px;
 }
 
-button:hover {
+.member button:hover {
   background: #0097a7;
 }
 
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
 
+/* Tablet Responsive */
+@media (max-width: 900px) {
+  section {
+    padding: 30px 15px;
+  }
+  
+  .profile-img {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .profile-desc h3 {
+    font-size: 1.3rem;
+  }
+  
+  .profile-desc p {
+    font-size: 1rem;
+  }
+}
 
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .top a {
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .people-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 10px;
+  }
+  
+  .community-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 10px;
+  }
+  
+  .profiles-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 0 15px;
+  }
+  
+  .profiles-grid .profile-row {
+    max-width: 100%;
+  }
+  
+  .profile-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .profile-desc h3 {
+    font-size: 1.2rem;
+  }
+  
+  .profile-desc p {
+    font-size: 0.95rem;
+  }
+  
+  .sector h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .community-banner,
+  .sector img {
+    height: 300px;
+  }
+  
+  .footer .divide {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer .div {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
 
+/* Small Mobile Responsive */
+@media (max-width: 480px) {
+  header {
+    padding: 12px 15px;
+  }
+  
+  .logo span {
+    font-size: 1.3rem;
+  }
+  
+  .nav-toggle {
+    font-size: 1.8rem;
+  }
+  
+  .people-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .community-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .person img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .person h3 {
+    font-size: 1rem;
+  }
+  
+  .person p {
+    font-size: 0.9rem;
+  }
+  
+  .person .contact-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .member img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .member h3 {
+    font-size: 1rem;
+  }
+  
+  .member p {
+    font-size: 0.85rem;
+  }
+  
+  .member button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .sector h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sector p {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+  
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-desc h3 {
+    font-size: 1.1rem;
+  }
+  
+  .profile-desc p {
+    font-size: 0.9rem;
+  }
+  
+  .community-banner,
+  .sector img {
+    height: 200px;
+  }
+  
+  .social-icons {
+    gap: 15px;
+  }
+  
+  .social-icons img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  form {
+    padding: 20px 15px;
+    margin: 20px 15px;
+  }
+  
+  button, .we {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+  }
+}
 
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .profile-img {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .profile-desc h3 {
+    font-size: 1rem;
+  }
+  
+  .profile-desc p {
+    font-size: 0.85rem;
+  }
+  
+  .community-banner,
+  .sector img {
+    height: 180px;
+  }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+  .community-banner,
+  .sector img {
+    height: 250px;
+  }
+  
+  .profile-row {
+    flex-direction: row;
+  }
+}
+
+/* Fix for very large screens */
+@media (min-width: 1400px) {
+  section {
+    max-width: 1400px;
+  }
+  
+  .people-grid,
+  .community-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
